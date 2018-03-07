@@ -1,0 +1,12 @@
+package com.cosmo.managementNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.vo.PopManagementNewCarBodyVO;
+
+public interface PopManagementNewCarBodyService {
+	List<PopManagementNewCarBodyVO> selectNewCarBody(PopManagementNewCarBodyVO managementNewCarBodyVO) throws Exception;
+
+	List<PopManagementNewCarBodyVO> selectNewCarUnit(PopManagementNewCarBodyVO managementNewCarBodyVO) throws Exception;
+
+}

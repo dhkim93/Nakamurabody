@@ -1,0 +1,33 @@
+package com.cosmo.vo;
+
+public class PopManagementNewCarBodyVO {
+
+	String masterType = "";
+	String comboType = "";
+	String comboName = "";
+
+	public String getMasterType() {
+		return masterType;
+	}
+
+	public void setMasterType(String masterType) {
+		this.masterType = masterType;
+	}
+
+	public String getComboType() {
+		return comboType;
+	}
+
+	public void setComboType(String comboType) {
+		this.comboType = comboType;
+	}
+
+	public String getComboName() {
+		return comboName;
+	}
+
+	public void setComboName(String comboName) {
+		this.comboName = comboName;
+	}
+
+}

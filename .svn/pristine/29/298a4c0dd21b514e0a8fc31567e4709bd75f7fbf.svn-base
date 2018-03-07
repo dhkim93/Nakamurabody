@@ -1,0 +1,46 @@
+package com.cosmo.estimateNewCar.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cosmo.estimateNewCar.dao.NewCarSelectDao;
+import com.cosmo.vo.NewCarSelectVO;
+
+@Service
+public class NewCarSelectServiceImpl implements NewCarSelectService {
+
+	@Autowired
+	private NewCarSelectDao newCarSelectDao;
+	
+//	public void setNewCarSelectDao(NewCarSelectDao newCarSelectDao){
+//		this.newCarSelectDao = newCarSelectDao;
+//	}
+
+	//グリッド取得
+	public List<NewCarSelectVO> selectNewCar(NewCarSelectVO newCarSelectVO) throws Exception {
+		return newCarSelectDao.selectNewCar(newCarSelectVO);
+	}
+	
+	//ボデータイプコンボボックス情報取得
+	public List<NewCarSelectVO> selectBodyType() throws Exception {
+		return newCarSelectDao.selectBodyType();
+	}
+	
+	//ボデー明細	コンボボックス情報取得
+	public List<NewCarSelectVO> selectBodyTypeDetail(NewCarSelectVO newCarSelectVO) throws Exception {
+		return newCarSelectDao.selectBodyTypeDetail(newCarSelectVO);
+	}
+	
+	//グリッド削除
+	public int deleteNewCar(NewCarSelectVO newCarSelectVO) throws Exception {
+		return newCarSelectDao.deleteNewCar(newCarSelectVO);
+	}		
+	
+	//グリッド削除
+	public int deleteNewCarDetail(NewCarSelectVO newCarSelectVO) throws Exception {
+		return newCarSelectDao.deleteNewCarDetail(newCarSelectVO);
+	}			
+	
+}

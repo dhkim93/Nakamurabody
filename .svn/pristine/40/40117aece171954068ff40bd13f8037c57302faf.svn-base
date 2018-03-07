@@ -1,0 +1,97 @@
+package com.cosmo.employee.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cosmo.customer.HomeController;
+import com.cosmo.employee.service.PopManagementEmployeeService;
+import com.cosmo.vo.EmployeeManagementVO;
+
+@Controller
+public class PopManagementEmployeeController {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	@Autowired
+	private PopManagementEmployeeService popManagementEmployeeService;
+
+	@RequestMapping(value = "/popManagementEmployee.do")
+	public String employeeSelectView(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO,
+			ModelMap model) throws Exception {
+		List<EmployeeManagementVO> popEmployeeSelect = popManagementEmployeeService
+				.selectPopEmployeeInfo(employeeManagementVO);
+		model.addAttribute("popEmployeeSelect", popEmployeeSelect);
+		return "Employee/popManagementEmployee";
+	}
+
+	//ユーザ削除
+	@RequestMapping(value = "/deletePopEmployeeInfo.ajax")
+	public ModelAndView deletePopEmployeeInfo(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO, ModelMap model)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		// System.out.println("削除 ajax !!!!!!!!!!!" + newCarSelectVO.getEstimatenumber()
+		// + " " + newCarSelectVO.getCustomerid());
+		System.out.println("削除 ajax !!!!!!!!!!!");
+		int resultCnt = popManagementEmployeeService.deletePopEmployeeInfo(employeeManagementVO);
+		mv.addObject("resultCnt", resultCnt);
+		return mv;
+	}
+//	ユーザ情報更新
+	@RequestMapping(value = "/updatePopEmployeeInfo.ajax")
+	public ModelAndView updatePopEmployeeInfo(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO, ModelMap model)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		System.out.println("更新 ajax !!!!!!!!!!!");
+		int resultCnt = popManagementEmployeeService.updatePopEmployeeInfo(employeeManagementVO);
+		mv.addObject("resultCnt", resultCnt);
+		return mv;
+	}
+	
+//	ユーザ情報登録
+	@RequestMapping(value = "/insertPopEmployeeInfo.ajax")
+	public ModelAndView insertPopEmployeeInfo(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO, ModelMap model)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		System.out.println("登録 ajax !!!!!!!!!!!");
+		int resultCnt = popManagementEmployeeService.insertPopEmployeeInfo(employeeManagementVO);
+		System.out.println("result Cnt Insert : " +resultCnt );
+		mv.addObject("resultCnt", resultCnt);
+		return mv;
+	}
+//	パスワードを初期化
+	@RequestMapping(value = "/resetPopEmployeeInfo.ajax")
+	public ModelAndView resetPopEmployeeInfo(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO, ModelMap model)
+			throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		System.out.println("Reset ajax !!!!!!!!!!!");
+		int resultCnt = popManagementEmployeeService.resetPopEmployeeInfo(employeeManagementVO);
+		mv.addObject("resultCnt", resultCnt);
+		return mv;
+	}
+	
+	@RequestMapping(value = "/duplicatePopEmployeeInfo.ajax")
+	public ModelAndView duplicatePopEmployeeInfo(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO,
+			ModelMap model) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<EmployeeManagementVO> dupPopEmployeeSelect = popManagementEmployeeService
+				.duplicatePopEmployeeInfo(employeeManagementVO);
+		int dupCheck = 0;
+		System.out.println("your Size : "+dupPopEmployeeSelect.size());
+		if(dupPopEmployeeSelect.size() != 0) {
+			dupCheck++;
+			String dupName = dupPopEmployeeSelect.get(0).getEmployeeName();
+			model.addAttribute("dupName", dupName);
+		}
+		System.out.println("dup? : "+dupCheck);
+		model.addAttribute("dupCheck", dupCheck);
+		return mv;
+	}
+
+}

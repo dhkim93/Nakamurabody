@@ -1,0 +1,65 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style tyle="text/css">
+#left-box {
+	width: 100px;
+	display: inline-block;
+	background-color: blue;
+}
+
+#center-box {
+	text-align: center;
+	display: inline-block;
+	margin-left: 300px;
+	height: 30px;
+}
+
+#right-box {
+	width: 300px;
+	display: inline-block;
+	height: 50px;
+	text-align: right;
+}
+</style>
+<script language='javascript'>
+	function btnLogout() {
+
+		location.href = "main.do";
+
+	}
+</script>
+<body>
+	<div id='left-box'>
+		<img src="/resources/images/logo.png">
+	</div>
+	<div id='center-box'>
+		<c:choose>
+			<c:when test="${param.parameter.equals('employeeInfo')}">
+				<h1>社員情報管理</h1>
+			</c:when>
+			<c:when test="${param.parameter.equals('estimateManageNewCar')}">
+				<h1>新車見積マスタメンテナンス</h1>
+			</c:when>
+			<c:otherwise>
+				<font size="7">管理者保守メーニュ </font>
+			</c:otherwise>
+		</c:choose>
+	</div>
+	<div id='right-box'>
+		<form action="">
+			<input type="button" onclick="btnLogout()" value="ログアウと" />
+		</form>
+		${param.id} ${param.name}
+	</div>
+
+
+
+</body>
+</html>

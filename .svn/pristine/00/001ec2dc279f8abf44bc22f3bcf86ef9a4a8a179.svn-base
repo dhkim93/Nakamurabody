@@ -1,0 +1,49 @@
+package com.cosmo.estimateNewCar.controller;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cosmo.customer.HomeController;
+import com.cosmo.estimateNewCar.service.NewCarSelectService;
+import com.cosmo.vo.NewCarSelectVO;
+
+@Controller
+public class NewCarSelectController {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	private NewCarSelectService newCarSelectService;
+
+//	@RequestMapping(value = "/EstimateNewCar/newCarSelect", method = RequestMethod.GET)
+//	public String autoTotalMain(@ModelAttribute("newCarSelectVO") NewCarSelectVO newCarSelectVO, ModelMap model) throws Exception {
+//		List<NewCarSelectVO> newCarSelect = newCarSelectService.selectNewCar(newCarSelectVO);
+//		model.addAttribute("newCarSelect", newCarSelect );
+//		return "EstimateNewCar/newCarSelect";
+//	}
+	
+	@RequestMapping(value="/newCarSelect.do")
+	public String newCarSelectView(ModelMap model) throws Exception {
+		return "EstimateNewCar/newCarSelect";
+	}	
+
+	@RequestMapping(value = "/newCarSelect.ajax")
+	public ModelAndView newCarSelect(@ModelAttribute("newCarSelectVO") NewCarSelectVO newCarSelectVO, ModelMap model) throws Exception {
+		System.out.println("ajax!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+		ModelAndView mv = new ModelAndView("jsonView");
+//		Map<String, Object> resultMap = new HashMap<String, Object>();
+		List<NewCarSelectVO> newCarSelect = newCarSelectService.selectNewCar(newCarSelectVO);
+		mv.addObject("resultList", newCarSelect);
+		return mv;
+	}	
+}

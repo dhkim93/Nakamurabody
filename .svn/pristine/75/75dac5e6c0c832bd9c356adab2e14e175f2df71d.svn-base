@@ -1,0 +1,14 @@
+package com.cosmo.managementRepair.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import com.cosmo.vo.NewCarSelectVO;
+
+public class PopManagementManhourDaoImpl extends SqlSessionDaoSupport implements PopManagementManhourDao {
+
+	@Override
+	public List<NewCarSelectVO> selectPrice(NewCarSelectVO newCarSelectVO) throws Exception {
+		return getSqlSession().selectList("popManagementManhourDao.selectPrice", newCarSelectVO);
+	}
+}

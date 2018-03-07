@@ -1,0 +1,123 @@
+package com.cosmo.vo;
+
+public class CustomerSelectVO {
+
+	String customerId;
+	String customerKana;
+	String customerName1;
+	String customerName2;
+	String customerState;
+	String customerPost;
+	String customerAddress1;
+	String customerAddress2;
+	String customerAddress3;
+	String customerTelephone1;
+	String customerTelephone2;
+	String customerFax;
+	String customerEmail;
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getCustomerKana() {
+		return customerKana;
+	}
+
+	public void setCustomerKana(String customerKana) {
+		this.customerKana = customerKana;
+	}
+
+	public String getCustomerName1() {
+		return customerName1;
+	}
+
+	public void setCustomerName1(String customerName1) {
+		this.customerName1 = customerName1;
+	}
+
+	public String getCustomerName2() {
+		return customerName2;
+	}
+
+	public void setCustomerName2(String customerName2) {
+		this.customerName2 = customerName2;
+	}
+
+	public String getCustomerState() {
+		return customerState;
+	}
+
+	public void setCustomerState(String customerState) {
+		this.customerState = customerState;
+	}
+
+	public String getCustomerPost() {
+		return customerPost;
+	}
+
+	public void setCustomerPost(String customerPost) {
+		this.customerPost = customerPost;
+	}
+
+	public String getCustomerAddress1() {
+		return customerAddress1;
+	}
+
+	public void setCustomerAddress1(String customerAddress1) {
+		this.customerAddress1 = customerAddress1;
+	}
+
+	public String getCustomerAddress2() {
+		return customerAddress2;
+	}
+
+	public void setCustomerAddress2(String customerAddress2) {
+		this.customerAddress2 = customerAddress2;
+	}
+
+	public String getCustomerAddress3() {
+		return customerAddress3;
+	}
+
+	public void setCustomerAddress3(String customerAddress3) {
+		this.customerAddress3 = customerAddress3;
+	}
+
+	public String getCustomerTelephone1() {
+		return customerTelephone1;
+	}
+
+	public void setCustomerTelephone1(String customerTelephone1) {
+		this.customerTelephone1 = customerTelephone1;
+	}
+
+	public String getCustomerTelephone2() {
+		return customerTelephone2;
+	}
+
+	public void setCustomerTelephone2(String customerTelephone2) {
+		this.customerTelephone2 = customerTelephone2;
+	}
+
+	public String getCustomerFax() {
+		return customerFax;
+	}
+
+	public void setCustomerFax(String customerFax) {
+		this.customerFax = customerFax;
+	}
+
+	public String getCustomerEmail() {
+		return customerEmail;
+	}
+
+	public void setCustomerEmail(String customerEmail) {
+		this.customerEmail = customerEmail;
+	}
+
+}

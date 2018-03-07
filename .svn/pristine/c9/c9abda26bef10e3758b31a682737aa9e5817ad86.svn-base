@@ -1,0 +1,12 @@
+package com.cosmo.estimateNewCar.service;
+
+import com.cosmo.estimateNewCar.dao.PopEstimateNewCarDetailDao;
+
+public class PopEstimateNewCarDetailServiceImpl implements PopEstimateNewCarDetailService {
+
+	private PopEstimateNewCarDetailDao popEstimateNewCarDetailDao;
+	
+	public void setPopEstimateNewCarDetailDao(PopEstimateNewCarDetailDao popEstimateNewCarDetailDao){
+		this.popEstimateNewCarDetailDao = popEstimateNewCarDetailDao;
+	}
+}

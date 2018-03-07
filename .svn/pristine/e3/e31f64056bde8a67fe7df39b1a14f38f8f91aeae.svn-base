@@ -1,0 +1,76 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style tyle="text/css">
+#header {
+	height: 30px;
+}
+
+#nav {
+	height: 90px;
+}
+
+#body {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	height: 400px;
+	width: 800px;
+	margin: -100px 0px 0px -100px;
+}
+
+#footer {
+	position: fixed;
+	bottom: 0;
+	height: 50px;
+	left: 35%;
+}
+
+#btn {
+	background-color: #ffffff;
+	border: none;
+	outline: none;
+	padding: 15px 25px 15px 0px;
+}
+</style>
+<body>
+	<div id="menu">
+		<%@ include file="header.jsp"%>
+	</div>
+	<div id="nav">
+		<%@ include file="nav_main.jsp"%>
+	</div>
+	
+	<div id="body">
+		<%-- <jsp:include page="<%=contentPage %>"/>  --%>
+		ID <input type="text" name="id" /><br> PWD <input
+			type="password" name="password" /><br>
+
+		<div id="btn">
+			<div style="margin-right: 10px; float: left; width: 11%;">
+				<input type="button" value="ログイン" style="height: 30px; width: 80px;">
+			</div>
+			<div style="margin-left: 10px;">
+			
+				<input type="button" value="終了" style="height: 30px; width: 80px;">
+					<c:out value="${employeeSelect.get(0).employeeId}"/>
+				
+					<c:forEach items="${employeeSelect}" var="employees" varStatus="status">
+						${employees.employeeId}
+					</c:forEach>
+				
+			</div>
+		</div>
+	</div>
+				
+	<div id="footer">
+		<%@ include file="footer.jsp"%>
+	</div>
+</body>
+</html>

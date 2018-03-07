@@ -1,0 +1,14 @@
+package com.cosmo.estimateNewCar.dao;
+
+import java.util.List;
+
+import com.cosmo.vo.NewCarSelectVO;
+
+public interface NewCarSelectDao{
+	
+	//
+	public List<NewCarSelectVO> selectNewCar(NewCarSelectVO newCarSelectVO) throws Exception;
+	
+	//ボデータイプコンボボックス置取得
+	public List<NewCarSelectVO> selectBodyType() throws Exception;
+}

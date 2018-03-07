@@ -1,0 +1,236 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<style type="text/css">
+#wrap {
+	width: 1200px;
+	height: 700px;
+	background: blue;
+}
+
+#header {
+	width: 1400px;
+	height: 70px;
+	margin-left: 50px;
+	margin-bottom: 10px;
+}
+
+#middle {
+	width: 1400px;
+	margin-left: 50px;
+	float: left;
+}
+
+#sidebar1 {
+	width: 800px;
+	height: 180px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+#sidebar2 {
+	width: 800px;
+	height: 350px;
+	float: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	background: gray;
+}
+
+#content {
+	width: 560px;
+	height: 560px;
+	float: right;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-right: 10px;
+}
+
+#footer {
+	width: 1400px;
+	height: 70px;
+	float: left;
+	margin-left: 50px;
+	margin-top: 10px;
+}
+</style>
+
+<script>
+function searchclk() {
+	
+}
+</script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div id="header" align=center>
+		<h1>顧客情報選択</h1>
+	</div>
+	<div id="middle">
+		<div id="sidebar1">
+			<fieldset>
+				<form method=post name=searchMember action="#">
+					<table width=100% border=0 cellspacing=0>
+						<tr>
+							<td colspan=3 bgcolor=skyblue>顧客情報検索</td>
+						</tr>
+						<tr>
+							<td colspan=3 height=10></td>
+						</tr>
+						<tr>
+							<td width=120 bgcolor=skyblue>顧客名（カナ）</td>
+							<td width=20></td>
+							<td><input type=text size=30 name=username></td>
+						</tr>
+						<tr>
+							<td colspan=3 height=10></td>
+						</tr>
+						<tr>
+							<td bgcolor=skyblue>電話番号</td>
+							<td></td>
+							<td><input type=text size=12 name=searchPhone>（下４桁）</td>
+						</tr>
+						<tr>
+							<td colspan=3 height=10></td>
+						</tr>
+					</table>
+					<center>
+						<input type=reset style="width: 110pt; height: 30pt;" value="クリア">
+						<input type=button style="width: 110pt; height: 30pt;" value="検索"
+							onclick="searchclk()">
+					</center>
+				</form>
+			</fieldset>
+		</div>
+		<div id="content">
+			<fieldset>
+				<form method=post name=detailMember action=#>
+					<table width=100% border=0>
+						<tr>
+							<td colspan=3 bgcolor=skyblue>顧客情報詳細</td>
+						</tr>
+						<tr>
+							<td colspan=3 height=5></td>
+						</tr>
+						<tr>
+							<td width=120 bgcolor=skyblue>顧客名（カナ）</td>
+							<td width=20></td>
+							<td><input type=text size=30 name=usernameKana
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td colspan=3 height=5></td>
+						</tr>
+						<tr>
+							<td width=120 bgcolor=skyblue>顧客名（漢字）</td>
+							<td width=20></td>
+							<td><input type=text size=30 name=usernameKanji1
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td colspan=3 height=5></td>
+						</tr>
+						<tr>
+							<td></td>
+							<td></td>
+							<td><input type=text size=30 name=usernameKanji2
+								readonly="readonly"></td>
+						</tr>
+						<tr>
+							<td colspan=3 height=5></td>
+						</tr>
+						<tr>
+							<td width=120 bgcolor=skyblue>敬称</td>
+							<td width=20></td>
+							<td><input type=text size=10 name=nameTitle
+								readonly="readonly"></td>
+						</tr>
+					</table>
+					<p>
+					<fieldset>
+						<legend align="left">顧客情報</legend>
+						<table width=100% border=0>
+							<tr>
+								<td width=120 bgcolor=skyblue>郵便番号</td>
+								<td width=20></td>
+								<td><input type=text size=15 name=postNum
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td colspan=3 height=5></td>
+							</tr>
+							<tr>
+								<td width=120 bgcolor=skyblue>住所</td>
+								<td width=20></td>
+								<td><input type=text size=35 name=address1
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td colspan=3 height=5></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td><input type=text size=35 name=address2
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td><input type=text size=35 name=address3
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td width=120 bgcolor=skyblue>電話番号</td>
+								<td width=20></td>
+								<td><input type=text size=35 name=detailPhone1
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td colspan=3 height=5></td>
+							</tr>
+							<tr>
+								<td></td>
+								<td></td>
+								<td><input type=text size=35 name=detailPhone2
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td width=120 bgcolor=skyblue>FAX番号</td>
+								<td width=20></td>
+								<td><input type=text size=35 name=detailFaxNum
+									readonly="readonly"></td>
+							</tr>
+							<tr>
+								<td colspan=3 height=5></td>
+							</tr>
+							<tr>
+								<td width=120 bgcolor=skyblue>E-Mail</td>
+								<td width=20></td>
+								<td><input type=text size=40 name=detailEmail
+									readonly="readonly"></td>
+							</tr>
+						</table>
+						<p>
+							<span style="float: right"><input type=submit
+								style="width: 110pt; height: 30pt;" value="確定"></span>
+					</fieldset>
+				</form>
+			</fieldset>
+		</div>
+		<div id="sidebar2">sidebar2</div>
+	</div>
+	<div id="footer">
+		&nbsp;&nbsp;<input type=button style="width: 120pt; height: 40pt;"
+			value="閉じる" onclick="window.close();">
+	</div>
+
+</body>
+</html>

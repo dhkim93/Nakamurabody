@@ -1,0 +1,42 @@
+package com.cosmo.estimateNewCar.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cosmo.estimateNewCar.service.EstimateNewCarService;
+import com.cosmo.vo.EstimateNewCarVO;
+
+@Controller
+public class EstimateNewCarController {
+
+	@Autowired
+	private EstimateNewCarService estimateNewCarSelectSerivce;
+
+	// 初期画面処理
+	@RequestMapping("estimateNewCarView.do")
+	public String estimateNewCarView(ModelMap model) throws Exception {
+
+		List<EstimateNewCarVO> selectBodyType = estimateNewCarSelectSerivce.selectBodyType();
+		model.addAttribute("selectBodyType", selectBodyType);
+		return "EstimateNewCar/estimateNewCar";
+	}
+	
+	// 検索処理
+	@RequestMapping("searchByBodyType.ajax")
+	public ModelAndView searchByBodyType(@ModelAttribute("estimateNewCarVO") EstimateNewCarVO estimateNewCarVO,
+			Model model) throws Exception {
+
+		ModelAndView mav = new ModelAndView("jsonView");
+		List<EstimateNewCarVO> resultList = estimateNewCarSelectSerivce.searchByBodyType(estimateNewCarVO);
+		mav.addObject("searchByBodyType", resultList);
+		return mav;
+	}
+
+}

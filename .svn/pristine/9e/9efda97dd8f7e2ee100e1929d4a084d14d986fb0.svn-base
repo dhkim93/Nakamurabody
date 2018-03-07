@@ -1,0 +1,31 @@
+package com.cosmo.estimateNewCar.controller;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cosmo.customer.HomeController;
+import com.cosmo.estimateNewCar.service.PopEstimateNewCarDetailService;
+
+/*
+ * naehoon
+ * 2018-02-23
+ * 新車見積詳細 Controller
+ **/
+@Controller
+public class PopEstimateNewCarDetailController {
+
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	private PopEstimateNewCarDetailService popEstimateNewCarDetailService;
+
+	//初期画面
+	@RequestMapping(value="/popEstimateNewCarDetail.do")
+	public String popEstimateNewCarDetail(ModelMap model) throws Exception {
+		return "EstimateNewCar/popEstimateNewCarDetail";
+	}
+}

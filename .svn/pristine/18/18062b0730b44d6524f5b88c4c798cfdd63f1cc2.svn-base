@@ -1,0 +1,234 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>newCarSelect</title>
+<c:import url="/WEB-INF/views/common/header.jsp" />
+<script type="text/javascript">
+	$(function() {
+		jqgridTrans = $('#wrapper');
+		jqgridTrans.jqGrid({
+			datatype : "local",
+			colNames : [ "見積番号", "見積日", "ボデータイプ", "仕様項目", "見積金額", "見積担当者明", "顧客名" ], // colname
+			colModel : [ // 
+			{
+				name : 'estimatenumber'
+			}, {
+				name : 'estimateday'
+			}, {
+				name : 'bodyname'
+			}, {
+				name : 'bodyspecname'
+			}, {
+				name : 'estimatemoney', formatter:numberWithCommas
+			}, {
+				name : 'estimateemployeename'
+			}, {
+				name : 'customername'
+			}, 
+			],
+			height : 280, //or auto, defaultHeight
+			width : 1150,
+// 			autowidth : false,
+			shrinkToFit : true,
+			rowNum : 50, //rownum	
+			// 		pager : "#pager", //paging
+			viewrecords : true,
+// 			multiselect : true,
+			rownumbers : true,
+			useColSpanStyle : true,
+			emptyrecords : "empty",
+			loadComplete : function(data) {
+				//initPage("wrapper", "", "");
+			},
+			ondblClickRow : function(rowid, iRow, iCol, e) {
+				var data = jQuery('#wrapper').jqGrid('getRowData', rowid);
+			}
+		});
+	});
+
+	//comma by third number format 
+	function numberWithCommas(x) {
+	    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	}
+
+	//ボデー明細combobox value取得
+	function searchBodyParticulars() {
+		var estimatenumber = $('#estimatenumber').val(); //顧客名
+		var estimateemployeekana = $('#estimateemployeekana').val(); //見積担当(カナ)
+		$.ajax({
+			type : "POST",
+			url : "<c:url value='/newCarSelect.ajax'/>",
+			data : {
+				"estimatenumber" : estimatenumber,
+				"estimateemployeekana" : estimateemployeekana
+			},
+			dataType : "json",
+			beforeSend : function() {
+			},
+			error : function(request, status, error) {
+				console.log(" code : " + request.status + " message : "
+						+ request.responseText + " error : " + error);
+			},
+			success : function(data) {
+				var result = data.resultList;
+				if (result != undefined && result.length > 0) {
+					$('#wrapper').jqGrid("clearGridData");
+					$('#wrapper').jqGrid("setGridParam", {
+						dataType : "local",
+						data : result
+					}).trigger("reloadGrid");
+				}
+			},
+			complete : function(data) {
+			}
+		});
+		return false;
+	}	
+
+	//GRID取得
+	function searchList() {
+		var estimatenumber = $('#estimatenumber').val(); //顧客名
+		var estimateemployeekana = $('#estimateemployeekana').val(); //見積担当(カナ)
+		$.ajax({
+			type : "POST",
+			url : "<c:url value='/newCarSelect.ajax'/>",
+			data : {
+				"estimatenumber" : estimatenumber,
+				"estimateemployeekana" : estimateemployeekana
+			},
+			dataType : "json",
+			beforeSend : function() {
+			},
+			error : function(request, status, error) {
+				console.log(" code : " + request.status + " message : "
+						+ request.responseText + " error : " + error);
+			},
+			success : function(data) {
+				var result = data.resultList;
+				if (result != undefined && result.length > 0) {
+					$('#wrapper').jqGrid("clearGridData");
+					$('#wrapper').jqGrid("setGridParam", {
+						dataType : "local",
+						data : result
+					}).trigger("reloadGrid");
+				}
+			},
+			complete : function(data) {
+			}
+		});
+		return false;
+	}
+</script>
+</head>
+<body>
+	<div id="header" align=center>
+		<h1>新車見積情報選択</h1>
+	</div>
+
+	<div id="middle">
+		<div id="sidebar1400">
+			<fieldset>
+				<form method=post name=searchCustomer action="#">
+					<table width=100% border=0 cellspacing=0>
+						<tr>
+							<td colspan=5 bgcolor=skyblue>新車見積情報検索</td>
+						</tr>
+						<tr>
+							<td colspan=5 height=5></td>
+						</tr>
+						<tr>
+							<td width=120 bgcolor=skyblue >見積番号</td>
+							<td width=20></td>
+							<td><input type=text size=15 name=estimatenumber  id="estimatenumber"> (修正のみ入力)</td>
+							<td width=20></td>
+						</tr>
+						
+						<tr><td colspan=3 height=5/></tr>
+						<tr>
+							<td width=120 bgcolor=skyblue>ボデータイプ</td>
+							<td></td>
+							<td>
+								<select id="bodytype" name="bodytype" onchange="">
+									<option value="#">選択してください。</option>
+									<c:forEach items="${bodyType}" var="bodyType">
+										<option value="${bodyType.combotype}">${bodyType.comboname}</option>
+									</c:forEach>
+								</select>								
+							</td>
+							<td width=120 bgcolor=skyblue>顧客名（カナ）</td>
+							<td><input type=text size=40 name=customerTelephone></td>
+						</tr>
+						<tr><td colspan=3 height=10/></tr>
+						<tr>
+							<td bgcolor=skyblue>ボデー明細</td>
+							<td></td>
+							<td>
+								<select name="body" style="height: 25px;">
+								    <option value="">選択してください。</option>
+								    <option value="1">1</option>
+								    <option value="2">2</option>
+								</select>
+							</td>
+							<td width=120 bgcolor=skyblue>見積期間</td>
+							<td>
+								<input type=text size=15 name=customerTelephone>~
+								<input type=text size=15 name=customerTelephone>
+							</td>
+						</tr>	
+						<tr><td colspan=3 height=5/></tr>					
+						<tr>
+							<td bgcolor=skyblue>見積担当(カナ)</td>
+							<td></td>
+							<td><input type=text size=30 name="estimateemployeekana" id="estimateemployeekana"></td>
+							<td width=120 bgcolor=skyblue>見積金額</td>
+							<td>
+								<input type=text size=15 name=customerTelephone>~
+								<input type=text size=15 name=customerTelephone>
+							</td>
+						</tr>
+						
+						<tr>
+							<td colspan=3 height=5></td>
+						</tr>
+					</table>
+					
+					<center>
+						<input type=reset style="width: 110pt; height: 30pt;" value="クリア">
+						<input type="button" style="width: 110pt; height: 30pt;" value="検索" onclick="javascript:searchList(); return false;">
+						<input type="button" style="width: 110pt; height: 30pt; float: right;" value="新規追加">
+					</center>
+				</form>
+			</fieldset>
+		</div>
+		
+		<div id="contentCenter">
+			<fieldset>
+				<table width=100% border=0 cellspacing=0>
+					<tr>
+						<td colspan=3 bgcolor=skyblue>新車見積情報一覧</td>
+					</tr>
+				</table>
+				<div id="sidebar2">
+					<table id="wrapper"></table>
+				</div>
+				<div style="display:inline-block; float: right; width: 150px; height: 250px;" >
+					<input type="button" style="width: 110pt; height: 30pt; margin-bottom: 230px;" value="参照/変更">
+					<input type="button" style="width: 110pt; height: 30pt; " value="削除">
+				</div>
+			</fieldset>
+		</div>
+		
+	</div>
+	<div id="footer2">
+			<input type=button style="width: 120pt; height: 40pt;" value="閉じる" onclick="window.close();">
+	</div>
+
+</body>
+</html>
+

@@ -1,0 +1,51 @@
+package com.cosmo.employee.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cosmo.employee.dao.PopManagementEmployeeDao;
+import com.cosmo.vo.EmployeeManagementVO;
+
+@Service
+public class PopManagementEmployeeServiceImpl implements PopManagementEmployeeService {
+	@Autowired
+	private PopManagementEmployeeDao popManagementEmployeeDao;
+
+	// public void setPopManagementEmployeeDao(PopManagementEmployeeDao
+	// popManagementEmployeeDao) {
+	// this.popManagementEmployeeDao = popManagementEmployeeDao;
+	// }
+
+	// 該当ユーザ情報取得
+	public List<EmployeeManagementVO> selectPopEmployeeInfo(EmployeeManagementVO employeeManagementVO)
+			throws Exception {
+		return popManagementEmployeeDao.selectPopEmployeeInfo(employeeManagementVO);
+	}
+
+	// グリッド削除
+	public int deletePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return popManagementEmployeeDao.deletePopEmployeeInfo(employeeManagementVO);
+	}
+
+	// ユーザ情報更新
+	public int updatePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return popManagementEmployeeDao.updatePopEmployeeInfo(employeeManagementVO);
+	}
+
+	// ユーザ情報登録
+	public int insertPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return popManagementEmployeeDao.insertPopEmployeeInfo(employeeManagementVO);
+	}
+
+	// パスワードを初期化
+	public int resetPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return popManagementEmployeeDao.resetPopEmployeeInfo(employeeManagementVO);
+	}
+	// 重複チェック
+	public List<EmployeeManagementVO> duplicatePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception{
+		return popManagementEmployeeDao.duplicatePopEmployeeInfo(employeeManagementVO);
+	}
+
+}

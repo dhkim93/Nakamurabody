@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="repairSelectDao" >
+	
+	<!-- select Query -->
+	<select id="selectRepairCar" parameterType="repairSelectVO" resultType="repairSelectVO">
+	    <![CDATA[
+		SELECT 
+			 DISTINCT ON(T1.ESTIMATENUMBER)T1.ESTIMATENUMBER AS ESTIMATENUMBER
+			,T1.CUSTOMERID AS CUSTOMERID
+			,T2.CUSTOMERNAME1 AS CUSTOMERNAME
+			,T1.VEHICLETYPE
+			,T1.VEHICLENAME
+			,T1.WORKITEMTYPE
+			,T1.WORKITEMNAME
+			,T1.DAMAGE			
+			,T1.ESTIMATEMONEY
+			,T1.ESTIMATEEMPLOYEEID
+			,T1.ESTIMATEEMPLOYEENAME
+			,T1.ESTIMATEEMPLOYEEKANA
+			,T1.ESTIMATEDAY
+			,T1.REMARKS
+		FROM 
+			REPAIRESTIMATEINFO T1
+		INNER JOIN 
+			CUSTOMERINFO T2
+		ON T1.CUSTOMERID = T2.CUSTOMERID
+		WHERE 
+			ESTIMATENUMBER LIKE #{estimatenumber}||'%'
+		AND ESTIMATEEMPLOYEEKANA LIKE #{estimateemployeekana}||'%'	
+		AND CUSTOMERKANA LIKE #{customerkana}||'%'	
+	    ]]>
+	    
+	    <choose>
+		    <when test="!estimatedayfrom.equals('') and !estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY BETWEEN CAST(#{estimatedayfrom} AS DATE) AND CAST(#{estimatedayto} AS DATE) ]]>
+		    </when>	   	    
+		    <when test="estimatedayfrom.equals('') and !estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY <= CAST(#{estimatedayto} AS DATE) ]]>
+		    </when>	   
+		    <when test="!estimatedayfrom.equals('') and estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY >= CAST(#{estimatedayfrom} AS DATE) ]]>
+		    </when>	 
+	    </choose>
+	    
+	    <choose>
+		    <when test="!estimatemoneyfrom.equals('')  and !estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY BETWEEN CAST(#{estimatemoneyfrom} AS NUMERIC) AND CAST(#{estimatemoneyto} AS NUMERIC)  ]]>
+		    </when>
+		    <when test="estimatemoneyfrom.equals('') and !estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY <= CAST(#{estimatemoneyto} AS NUMERIC)]]>
+		    </when>
+		    <when test="!estimatemoneyfrom.equals('') and estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY >= CAST(#{estimatemoneyfrom} AS NUMERIC) ]]>
+		    </when>	     
+	    </choose>		
+	    
+		<if test='vehicletype != "0"'>
+			<![CDATA[ AND VEHICLETYPE = #{vehicletype} ]]>
+		</if>
+		ORDER BY ESTIMATENUMBER DESC
+	</select>
+	
+	<select id="selectCarTypeDetail" parameterType="repairSelectVO" resultType="repairSelectVO">
+		SELECT 
+			MASTERTYPE
+			,COMBOTYPE
+			,COMBONAME
+		FROM CONSTMASTER
+		WHERE MASTERTYPE ='2'
+	</select>
+	
+	<select id="selectBodyTypeDetail" parameterType="repairSelectVO" resultType="repairSelectVO">
+		SELECT SPECDETAIL 
+		FROM 
+			NEWCARMASTERDETAIL
+		WHERE MASTERTYPE = #{bodytype}
+		AND TABNAME = 'A'
+	</select>
+	
+	<delete id="deleteNewCar" parameterType="repairSelectVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+		AND CUSTOMERID = #{customerid}
+	</delete>
+	
+	<delete id="deleteNewCarDetail" parameterType="repairSelectVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEDETAILINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+	</delete>	
+	
+</mapper>

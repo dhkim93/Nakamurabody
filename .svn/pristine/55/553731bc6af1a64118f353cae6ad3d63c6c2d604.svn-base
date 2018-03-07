@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<style tyle="text/css">
+#nav {
+	height:90px;
+}
+#body {
+position: absolute;
+top: 40%;
+left: 15%;
+height: 440px;
+width: 1170px;
+margin: -100px -100px 0px -100px;
+}
+#footer {
+    position: fixed;
+    bottom:0;
+    height:50px;   
+    left: 35%;
+}
+.btn {
+	background-color: #ffffff;
+	border:none;
+	outline:none;
+}	
+
+</style>
+<body>
+<div id="nav">
+<%@ include file="nav_manager.jsp" %>
+</div>
+<div id="body">
+		<div style="float: left; width: 33%; ">
+			<input type="button" value="新車見積マスタメンタナンス" style="height: 100px; width: 240px; font-size:25px">
+		</div>
+		<div style="float: left; width: 33%; ">		
+			<input type="button" value="修理見積&#10;マスタメンタナンス" style="height: 100px; width: 240px; font-size:25px">
+		</div>
+		<div style="float: left; width: 33%; ">
+			<input type="button" value="社員情報管理" style="height: 100px; width: 240px; font-size:25px">
+		</div>
+		<span style="float: left; width: 33%; padding-top: 80px">
+		<span style=" width: 11%; ">
+			<input type="button" value="ボデータイプメンタナンス" style="height: 60px; width: 110px; font-size:15px">
+		</span>
+		<span style="width: 22%; padding-left: 10px; ">		
+			<input type="button" value="単位メンタナンス" style="height: 60px; width: 110px; font-size:15px">
+		</span>
+		</span>
+		<span style="float: left; width: 33%; padding-top: 80px ">
+		<span style="width: 11%; ">
+			<input type="button" value="車輌タイプメンタナンス" style="height: 60px; width: 110px; font-size:15px">
+		</span>
+		<span style="width: 22%; padding-left: 10px;">
+			<input type="button" value="工賃メンタナンス" style="height: 60px; width: 110px; font-size:15px">
+		</span>
+		</span>
+		<span style="float: left; width: 40%; padding-top: 30px ">
+		</span>
+		<span style="float: left; width: 33%; padding-top: 5px ">
+		<span style="width: 11%; ">
+			<input type="button" value="車輌タイプメンタナンス" style="height: 60px; width: 110px; font-size:15px">
+		</span>
+		</span>
+	</div>
+
+<div id="footer">
+<%@ include file="footer.jsp" %>
+</div>
+</body>
+</html>

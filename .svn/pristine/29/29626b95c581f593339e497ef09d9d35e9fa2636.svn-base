@@ -1,0 +1,44 @@
+package com.cosmo.managementNewCar.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cosmo.managementNewCar.service.PopManagementNewCarBodyService;
+import com.cosmo.vo.PopManagementNewCarBodyVO;
+
+@Controller
+public class PopManagementNewCarBodyController {
+
+	@Autowired
+	private PopManagementNewCarBodyService popManagementNewCarBodyService;
+	
+	@RequestMapping(value = "/popManageNewCarBody.do")
+	public String newCarSelectView(@ModelAttribute("popManagementNewCarBodyVO") PopManagementNewCarBodyVO managementNewCarBodyVO, ModelMap model) throws Exception {
+		
+		List<PopManagementNewCarBodyVO> data = popManagementNewCarBodyService.selectNewCarBody(managementNewCarBodyVO);
+		model.addAttribute("list",data);
+		return "ManagementNewCar/pop_management_new_car_body";
+	}
+
+	
+	
+	
+	
+	
+	
+//	@RequestMapping(value = "/newCarSelect.ajax")
+//	public ModelAndView newCarSelect(@ModelAttribute("newCarSelectVO") NewCarSelectVO newCarSelectVO, ModelMap model)
+//			throws Exception {
+//		System.out.println("ajax!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+//		ModelAndView mv = new ModelAndView("jsonView");
+//		List<NewCarSelectVO> newCarSelect = newCarSelectService.selectNewCar(newCarSelectVO);
+//		mv.addObject("resultList", newCarSelect);
+//		return mv;
+//	}
+
+}

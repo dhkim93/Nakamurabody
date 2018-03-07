@@ -1,0 +1,9 @@
+package com.cosmo.managementNewCar.dao;
+
+import java.util.List;
+
+import com.cosmo.vo.PopManagementNewCarBodyVO;
+
+public interface PopManagementNewCarBodyDao {
+	public List<PopManagementNewCarBodyVO> selectNewCarBody(PopManagementNewCarBodyVO managementNewCarBodyVO) throws Exception;
+}

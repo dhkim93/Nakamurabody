@@ -1,0 +1,12 @@
+package com.cosmo.employee.service;
+
+import java.util.List;
+
+import com.cosmo.vo.EmployeeManagementVO;
+
+public interface EmployeeManagementService {
+
+	List<EmployeeManagementVO> selectEmployeeManagement(EmployeeManagementVO employeeManagementVO) throws Exception;
+
+	
+}

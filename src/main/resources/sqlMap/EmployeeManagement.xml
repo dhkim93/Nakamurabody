@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="employeeManagementDao">
+	<select id="selectEmployeeManagement" parameterType="employeeManagementVO"
+		resultType="employeeManagementVO">
+		SELECT * FROM "employeeinfo"
+	</select>
+	
+	<select id="selectEmployeeInfo" parameterType="employeeManagementVO"
+		resultType="employeeManagementVO">
+		SELECT employeeid, employeename, employeekana,
+		employeemobilenumber,employeeenteringday, employeeleavingday 
+		FROM
+		"employeeinfo"
+		WHERE 
+		EMPLOYEEID !='admin'
+		AND	EMPLOYEEID LIKE #{employeeId}||'%'
+		AND EMPLOYEEKANA LIKE #{employeeKana}||'%'
+		<choose>
+		    <when test="!employeeDayFrom.equals('') and !employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEEENTERINGDAY >= CAST(#{employeeDayFrom} AS DATE) AND EMPLOYEEENTERINGDAY <= CAST(#{employeeDayTo} AS DATE) ]]>
+		    </when>	   	    
+		    <when test="employeeDayFrom.equals('') and !employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEEENTERINGDAY <= CAST(#{employeeDayTo} AS DATE) ]]>
+		    </when>	   
+		    <when test="!employeeDayFrom.equals('') and employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEEENTERINGDAY >= CAST(#{employeeDayFrom} AS DATE) ]]>
+		    </when>	 
+	    </choose>
+	    <if test="chkResult != true">AND EMPLOYEELEAVINGDAY IS NULL</if>
+		ORDER BY EMPLOYEEENTERINGDAY
+	</select>
+
+	<delete id="deleteEmployeeInfo" parameterType="employeeManagementVO">
+		DELETE  
+		FROM 
+			"employeeinfo"
+		WHERE EMPLOYEEID = #{employeeId}
+	</delete>		
+	
+</mapper>

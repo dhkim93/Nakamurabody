@@ -1,0 +1,33 @@
+package com.cosmo.vo;
+
+public class EstimateNewCarVO {
+
+	private String mastertype;
+	private String combotype;
+	private String comboname;
+
+	public String getMastertype() {
+		return mastertype;
+	}
+
+	public void setMastertype(String mastertype) {
+		this.mastertype = mastertype;
+	}
+
+	public String getCombotype() {
+		return combotype;
+	}
+
+	public void setCombotype(String combotype) {
+		this.combotype = combotype;
+	}
+
+	public String getComboname() {
+		return comboname;
+	}
+
+	public void setComboname(String comboname) {
+		this.comboname = comboname;
+	}
+
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newCarSelectDao" >
+	
+	<!-- select Query -->
+	<select id="selectNewCar" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+	    <![CDATA[
+		SELECT 
+			 ESTIMATENUMBER
+			,T1.CUSTOMERID AS CUSTOMERID
+			,T2.CUSTOMERNAME1 AS CUSTOMERNAME
+			,BODYTYPE
+			,BODYNAME
+			,BODYSPECNAME
+			,ESTIMATEMONEY
+			,ESTIMATEEMPLOYEEID
+			,ESTIMATEEMPLOYEENAME
+			,ESTIMATEEMPLOYEEKANA
+			,ESTIMATEDAY
+			,REMARKS
+		FROM 
+			NEWCARESTIMATEINFO T1
+		INNER JOIN 
+			CUSTOMERINFO T2
+		ON T1.CUSTOMERID = T2.CUSTOMERID
+		WHERE 
+			ESTIMATENUMBER LIKE #{estimatenumber}||'%'
+		AND ESTIMATEEMPLOYEEKANA LIKE #{estimateemployeekana}||'%'	
+		AND CUSTOMERKANA LIKE #{customerkana}||'%'	
+	    ]]>
+	    
+	    <choose>
+		    <when test="!estimatedayfrom.equals('') and !estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY BETWEEN CAST(#{estimatedayfrom} AS DATE) AND CAST(#{estimatedayto} AS DATE) ]]>
+		    </when>	   	    
+		    <when test="estimatedayfrom.equals('') and !estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY <= CAST(#{estimatedayto} AS DATE) ]]>
+		    </when>	   
+		    <when test="!estimatedayfrom.equals('') and estimatedayto.equals('') ">
+		    <![CDATA[   AND ESTIMATEDAY >= CAST(#{estimatedayfrom} AS DATE) ]]>
+		    </when>	 
+	    </choose>
+	    
+	    <choose>
+		    <when test="!estimatemoneyfrom.equals('')  and !estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY BETWEEN CAST(#{estimatemoneyfrom} AS NUMERIC) AND CAST(#{estimatemoneyto} AS NUMERIC)  ]]>
+		    </when>
+		    <when test="estimatemoneyfrom.equals('') and !estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY <= CAST(#{estimatemoneyto} AS NUMERIC)]]>
+		    </when>
+		    <when test="!estimatemoneyfrom.equals('') and estimatemoneyto.equals('') ">
+		    <![CDATA[ AND ESTIMATEMONEY >= CAST(#{estimatemoneyfrom} AS NUMERIC) ]]>
+		    </when>	     
+	    </choose>		
+	    
+		<if test='bodytype != "0"'>
+			<![CDATA[ AND BODYTYPE = #{bodytype} ]]>
+		</if>
+		ORDER BY ESTIMATENUMBER DESC
+	</select>
+	
+	<select id="selectBodyType" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+		SELECT 
+			MASTERTYPE
+			,COMBOTYPE
+			,COMBONAME
+		FROM CONSTMASTER
+		WHERE MASTERTYPE ='1'
+	</select>
+	
+	<select id="selectBodyTypeDetail" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+		SELECT SPECDETAIL 
+		FROM 
+			NEWCARMASTERDETAIL
+		WHERE MASTERTYPE = #{bodytype}
+		AND TABNAME = 'A'
+	</select>
+	
+	<delete id="deleteNewCar" parameterType="newCarSelectVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+		AND CUSTOMERID = #{customerid}
+	</delete>
+	
+	<delete id="deleteNewCarDetail" parameterType="newCarSelectVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEDETAILINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+	</delete>	
+	
+</mapper>

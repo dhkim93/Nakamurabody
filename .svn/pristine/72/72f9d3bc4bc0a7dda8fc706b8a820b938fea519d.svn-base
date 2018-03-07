@@ -1,0 +1,36 @@
+package com.cosmo.customer.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.cosmo.customer.service.CustomerSelectService;
+import com.cosmo.vo.CustomerSelectVO;
+
+@Controller
+public class CustomerSelectController {
+
+	@Autowired
+	private CustomerSelectService customerSelectSerivce;
+
+	@RequestMapping(value = "/customerView.do")
+	public String customerSelectView(ModelMap model) throws Exception {
+		return "Customer/customerSelect";
+	}
+
+	@RequestMapping(value = "/customerSelect.ajax")
+	public ModelAndView customerSelect(@ModelAttribute("customerSelectVO") CustomerSelectVO customerSelectVO,
+			Model model) throws Exception {
+		ModelAndView mv = new ModelAndView("jsonView");
+		List<CustomerSelectVO> customerSelectList = customerSelectSerivce.selectCustomer(customerSelectVO);
+		mv.addObject("customerSelect", customerSelectList);
+		return mv;
+	}
+
+}

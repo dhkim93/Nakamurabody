@@ -1,0 +1,44 @@
+package com.cosmo.estimateRepair.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cosmo.customer.HomeController;
+import com.cosmo.estimateRepair.service.EstimateRepairService;
+import com.cosmo.vo.EstimateRepairVO;
+
+@Controller
+public class EstimateRepairController {
+	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+
+	@Autowired
+	private EstimateRepairService estimateRepairService;
+
+	@RequestMapping(value = "/seoltest.do")
+	public String seoltest(@ModelAttribute("estimateRepairVO") EstimateRepairVO estimateRepairVO, ModelMap model)
+			throws Exception {
+		List<EstimateRepairVO> newCarSelect = estimateRepairService.selectNewCar(estimateRepairVO);
+		model.addAttribute("newCarSelect", newCarSelect);
+		return "EstimateRepair/estimateRepairComfirm";
+	}
+
+	/*
+	 * @RequestMapping(value="/newCarSelect.do") public String
+	 * newCarSelectView(ModelMap model) throws Exception { return
+	 * "EstimateNewCar/newCarSelect"; }
+	 * 
+	 * @RequestMapping(value = "/newCarSelect.ajax") public ModelAndView
+	 * newCarSelect(@ModelAttribute("newCarSelectVO") NewCarSelectVO newCarSelectVO,
+	 * ModelMap model) throws Exception { ModelAndView mv = new
+	 * ModelAndView("jsonView"); List<NewCarSelectVO> newCarSelect =
+	 * newCarSelectService.selectNewCar(newCarSelectVO); mv.addObject("resultList",
+	 * newCarSelect); return mv; }
+	 */
+}

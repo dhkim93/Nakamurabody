@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="customerSelectDao">
+
+	<select id="selectCustomer" parameterType="customerSelectVO"
+		resultType="customerSelectVO">
+		SELECT customername1, address1, telephone1
+		FROM customerinfo
+		<where>
+			<if test="customerkana != ''">
+				customerkana LIKE '%'||#{customerkana}||'%'</if>
+			<if test="telephone1 != ''">
+				AND telephone1 LIKE '%'||#{telephone1}||'%'</if>
+		</where>
+	</select>
+
+	<select id="detailCustomer" parameterType="customerSelectVO"
+		resultType="customerSelectVO">
+		SELECT customerid, customerkana, customername1,
+		customername2, state,
+		post, address1, address2, address3, telephone1,
+		telephone2, fax, email
+		FROM customerinfo
+		<where>
+			customername1=#{customername1}
+			AND address1=#{address1}
+			AND
+			telephone1=#{telephone1}
+		</where>
+	</select>
+</mapper>

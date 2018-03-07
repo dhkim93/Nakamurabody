@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+                http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd
+                http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+                http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver"
+		p:order="1" p:viewClass="org.springframework.web.servlet.view.JstlView"
+		p:prefix="/WEB-INF/views/" p:suffix=".jsp" />
+
+	<bean id="beanNameResolver"
+		class="org.springframework.web.servlet.view.BeanNameViewResolver"
+		p:order="0" />
+
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+
+	<bean id="newCarSelectService"
+		class="com.cosmo.estimateNewCar.service.NewCarSelectServiceImpl">
+		<property name="newCarSelectDao" ref="newCarSelectDao" />
+	</bean>
+
+	<bean id="newCarSelectDao" class="com.cosmo.estimateNewCar.dao.NewCarSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+		p:dataSource-ref="dataSource-log4jdbc" />
+
+	<bean id="customerSelectService" class="com.cosmo.customer.service.CustomerSelectServiceImpl">
+		<property name="customerSelectDao" ref="customerSelectDao" />
+	</bean>
+
+	<bean id="customerSelectDao" class="com.cosmo.customer.dao.CustomerSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="estimateNewCarService"
+		class="com.cosmo.estimateNewCar.service.EstimateNewCarServiceImpl">
+		<property name="estimateNewCarDao" ref="estimateNewCarDao" />
+	</bean>
+
+	<bean id="estimateNewCarDao" class="com.cosmo.estimateNewCar.dao.EstimateNewCarDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="estimateRepairService"
+		class="com.cosmo.estimateRepair.service.EstimateRepairServiceImpl">
+		<property name="estimateRepairDao" ref="estimateRepairDao" />
+	</bean>
+
+	<bean id="estimateRepairDao" class="com.cosmo.estimateRepair.dao.EstimateRepairDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="employeeSelectService" class="com.cosmo.employee.service.EmployeeSelectServiceImpl">
+		<property name="employeeSelectDao" ref="employeeSelectDao" />
+	</bean>
+
+	<bean id="employeeSelectDao" class="com.cosmo.employee.dao.EmployeeSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="popManagementNewCarBodyService"
+		class="com.cosmo.managementNewCar.service.PopManagementNewCarBodyServiceImpl">
+		<property name="popManagementNewCarBodyDao" ref="popManagementNewCarBodyDao" />
+	</bean>
+
+	<bean id="popManagementNewCarBodyDao"
+		class="com.cosmo.managementNewCar.dao.PopManagementNewCarBodyDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="employeeManagementService"
+		class="com.cosmo.employee.service.EmployeeManagementServiceImpl">
+		<property name="employeeManagementDao" ref="employeeManagementDao" />
+	</bean>
+
+	<bean id="employeeManagementDao" class="com.cosmo.employee.dao.EmployeeManagementDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="managementManhourService"
+		class="com.cosmo.managementRepair.service.PopManagementManhourServiceImpl">
+		<property name="popManagementManhourDao" ref="popManagementManhourDao" />
+	</bean>
+
+	<bean id="popManagementManhourDao"
+		class="com.cosmo.managementRepair.dao.PopManagementManhourDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+	
+	<bean id="popEstimateNewCarDetailService"
+		class="com.cosmo.estimateNewCar.service.PopEstimateNewCarDetailServiceImpl">
+		<property name="popEstimateNewCarDetailDao" ref="popEstimateNewCarDetailDao" />
+	</bean>
+
+	<bean id="popEstimateNewCarDetailDao"
+		class="com.cosmo.estimateNewCar.dao.PopEstimateNewCarDetailDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
+
+	<context:component-scan base-package="com.cosmo" />
+
+</beans>

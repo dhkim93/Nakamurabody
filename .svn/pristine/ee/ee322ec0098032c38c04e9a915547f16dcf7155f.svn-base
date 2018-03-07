@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="org.postgresql.Driver" />
+		<property name="url" value="$jdbc:postgresql://localhost:5433" />
+		<property name="username" value="nakamura" />
+		<property name="password" value="nakamura" />
+	</bean>
+
+	<!-- mybatis setting -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:config/mybatis-config.xml" />
+	</bean>
+
+	<bean id="newCarSelectService"
+		class="com.cosmo.estimateNewCar.service.NewCarSelectServiceImpl">
+		<property name="newCarSelectDao" ref="newCarSelectDao" />
+	</bean>
+
+	<bean id="newCarSelectDao" class="com.cosmo.estimateNewCar.dao.NewCarSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="customerSelectService"
+		class="com.cosmo.customer.service.CustomerSelectServiceImpl">
+		<property name="customerSelectDao" ref="customerSelectDao" />
+	</bean>
+
+	<bean id="customerSelectDao" class="com.cosmo.customer.dao.CustomerSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>
+
+	<bean id="estimateRepairService" class="com.cosmo.estimateRepair.service.EstimateRepairServiceImpl">
+		<property name="estimateRepairDao" ref="estimateRepairDao"/>
+	</bean>
+
+	<bean id="estimateRepairDao" class="com.cosmo.estimateRepair.dao.EstimateRepairDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
+	
+	<bean id="employeeSelectService" class="com.cosmo.employee.service.EmployeeSelectServiceImpl">
+		<property name="employeeSelectDao" ref="employeeSelectDao"/>
+	</bean>
+
+	<bean id="employeeSelectDao" class="com.cosmo.employee.dao.EmployeeSelectDaoImpl">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+	</bean>	
+	
+	
+	
+</beans>

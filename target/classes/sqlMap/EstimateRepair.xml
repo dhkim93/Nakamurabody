@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="estimateRepairDao" >
+	<!-- select Query -->
+	<select id="selectAllCarType" resultType="estimateRepairVO">
+		SELECT combotype,comboname 
+		FROM constmaster 
+		WHERE mastertype='2'
+	</select>
+	
+	<select id="selectEstimateInfo" parameterType="estimateRepairVO" resultType="estimateRepairVO">
+		SELECT mastertype,tabid,specdetail,imageurl
+		FROM repairmaster 
+		WHERE mastertype=#{combotype}
+	</select>
+</mapper>

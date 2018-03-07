@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<style tyle="text/css">
+#header {
+	height:30px;
+}
+#nav {
+	height:60px;
+}
+#body {
+position: absolute;
+top: 50%;
+left: 40%;
+height: 400px;
+width: 800px;
+margin: -100px 0px 0px -100px;
+
+}
+#footer {
+    position: fixed;
+    bottom:0;
+    height:50px;   
+    left: 35%;
+}
+.btn {
+	background-color: #ffffff;
+	border:none;
+	outline:none;
+}	
+
+</style>
+<body>
+<div id="menu">
+<%@ include file="header.jsp" %>
+</div>
+<div id="nav">
+<%@ include file="nav_user.jsp" %>
+</div>
+<div id="body">
+<div id="btn"><button class="btn" id="newCar" type="button"><img class="btn-img" src="/resources/images/newCar.png"></button>
+<button class="btn" id="repairCar" type="button"><img class="btn-img" src="/resources/images/repairCar.png"></button></div>
+</div>
+
+<div id="footer">
+<%@ include file="footer.jsp" %>
+</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+package com.cosmo.managementRepair.service;
+
+import java.util.List;
+
+import com.cosmo.managementRepair.dao.PopManagementManhourDao;
+import com.cosmo.vo.ManhourSelectPriceVO;
+import com.cosmo.vo.NewCarSelectVO;
+
+public class PopManagementManhourServiceImpl implements PopManagementManhourService{
+	
+	private PopManagementManhourDao popManagementManhourDao;
+	
+	public void setPopManagementManhourDao(PopManagementManhourDao popManagementManhourDao){
+		this.popManagementManhourDao = popManagementManhourDao;
+	}
+
+	@Override
+	public List<ManhourSelectPriceVO> selectPrice(ManhourSelectPriceVO manhourSelectPriceVO) throws Exception {
+		// TODO Auto-generated method stub
+		return popManagementManhourDao.selectPrice(manhourSelectPriceVO);
+	}
+
+}

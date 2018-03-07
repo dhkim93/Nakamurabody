@@ -1,0 +1,11 @@
+package com.cosmo.managementRepair.service;
+import java.util.List;
+import com.cosmo.vo.EstimateRepairVO;
+import com.cosmo.vo.ManhourSelectPriceVO;
+import com.cosmo.vo.NewCarSelectVO;
+
+public interface PopManagementManhourService {
+
+	List<ManhourSelectPriceVO> selectPrice(ManhourSelectPriceVO manhourSelectPriceVO) throws Exception;
+
+}

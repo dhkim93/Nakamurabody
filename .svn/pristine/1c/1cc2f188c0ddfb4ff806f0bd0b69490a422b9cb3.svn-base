@@ -1,0 +1,14 @@
+package com.cosmo.employee.dao;
+
+import java.util.List;
+
+import com.cosmo.vo.EmployeeManagementVO;
+
+public interface EmployeeManagementDao {
+
+	public List<EmployeeManagementVO> selectEmployeeManagement(EmployeeManagementVO employeeManagementVO) throws Exception;
+
+	//グリッド取得
+	public List<EmployeeManagementVO> selectEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception;
+
+}

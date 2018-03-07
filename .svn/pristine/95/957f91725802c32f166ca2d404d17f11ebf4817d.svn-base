@@ -1,0 +1,27 @@
+package com.cosmo.estimateNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.estimateNewCar.dao.EstimateNewCarDao;
+import com.cosmo.vo.EstimateNewCarVO;
+
+public class EstimateNewCarServiceImpl implements EstimateNewCarService {
+
+	private EstimateNewCarDao estimateNewCarDao;
+
+	public void setEstimateNewCarDao(EstimateNewCarDao estimateNewCarDao) {
+		this.estimateNewCarDao = estimateNewCarDao;
+	}
+
+	@Override
+	public List<EstimateNewCarVO> selectBodyType() throws Exception {
+		return estimateNewCarDao.selectBodyType();
+	}
+
+	@Override
+	public List<EstimateNewCarVO> searchByBodyType(EstimateNewCarVO estimateNewCarVO) throws Exception {
+		// TODO 自動生成されたメソッド・スタブ
+		return estimateNewCarDao.searchByBodyType(estimateNewCarVO);
+	}
+	
+}

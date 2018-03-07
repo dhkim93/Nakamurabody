@@ -1,0 +1,17 @@
+package com.cosmo.estimateRepair.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.cosmo.vo.EstimateRepairVO;
+
+public class EstimateRepairDaoImpl extends SqlSessionDaoSupport implements EstimateRepairDao{
+	public List<EstimateRepairVO> selectNewCar(EstimateRepairVO estimateRepairVO) throws Exception {
+		return getSqlSession().selectList("estimateRepairDao.selectEstimate", estimateRepairVO);
+	}
+
+	public List<EstimateRepairVO> selectAllCarType() {
+		return getSqlSession().selectList("estimateRepairDao.selectAllCarType");
+	}
+}

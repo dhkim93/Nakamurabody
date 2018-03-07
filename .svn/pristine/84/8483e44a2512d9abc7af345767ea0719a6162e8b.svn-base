@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="popManagementNewCarBodyDao" >
+	<!-- select Query -->
+	<select id="selectManageNewCarBody" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '1'
+	</select>
+	
+	<delete id="deleteManageNewCarBody" parameterType="java.lang.String">
+		DELETE FROM constmaster
+		WHERE mastertype='1'
+		AND comboname= #{comboname}
+	</delete>
+	
+	<!-- select Query -->
+	<select id="selectManageNewCarUnit" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '3'
+	</select>
+	<!-- select Query -->
+	<select id="selectManageNewCarOption" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '1'
+	</select>
+	
+	
+</mapper>

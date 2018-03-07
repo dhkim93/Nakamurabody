@@ -1,0 +1,100 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page session="false" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ page import="java.util.*"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>newCarSelect</title>
+<c:import url="/WEB-INF/views/common/header.jsp" />
+<script type="text/javascript">
+
+$(function(){
+	jqgridTrans = $('#wrapper');
+	jqgridTrans.jqGrid({
+		datatype : "local",
+		colNames : ["mastertype","combotype", "comboname","inputtype"],		// colname
+		colModel: [			   					// 컬럼
+		   			{name:'mastertype'},
+		   			{name:'combotype'},
+		   			{name:'comboname'},
+		   			{name:'inputtype'},
+		          ],
+// 		height : defaultHeight,
+		height : "auto",
+		autowidth: true,
+        shrinkToFit: false,
+		rowNum : 20,	  //로우넘	
+// 		pager : "#pager", //페이징
+		viewrecords: true,
+		multiselect: true,
+		rownumbers: true,
+		useColSpanStyle : true,
+		emptyrecords: "empty",
+        
+		loadComplete : function (data){
+			initPage("wrapper", "", "");
+		},
+		ondblClickRow : function(rowid, iRow, iCol, e){
+			var data = jQuery('#wrapper').jqGrid('getRowData',rowid);
+		}
+	}
+});	
+
+	function searchList() {
+		alert("hello");
+		$.ajax({
+			url : "<c:url value='/newCarSelect.ajax'/>",
+			type : "post",
+			dataType : 'json',
+			beforeSend : function() {
+				startLoading();
+			},
+			error : function(request, status, error) {
+				//console.log(" code : " + request.status + " message : " + request.responseText + " error : " + error);
+			},
+			complete : function(data) {
+				stopLoading();
+			},
+			success : function(data) {
+				if (!ajaxSessionCheck(data))
+					return false;
+				var result = data.receiveList;
+				if (result != undefined && result.length > 0) {
+					$('#wrapper').jqGrid("clearGridData");
+					$('#wrapper').jqGrid("setGridParam", {
+						dataType : "local",
+						data : result
+					}).trigger("reloadGrid");
+				}
+			}
+		});
+		return false;
+	}
+</script>
+</head>
+<body>
+	<h1>Hello world!</h1>
+	<P>The time on the server is ${serverTime}.</P>
+	<p></p>
+	<p></p>
+	<form action="">
+		<table id="wrapper"></table>
+<!-- 				<div id="testTable"> -->
+<!-- 					<table border="1" bordercolor="1313EE"> -->
+<%-- 						<c:forEach items="${newCarSelect}" begin="1" var="comments" --%>
+<%-- 		 					varStatus="status"> --%>
+<!-- 							<tr> -->
+<%-- 								<td>${comments.mastertype}</td> --%>
+<!-- 							</tr> -->
+<%-- 						</c:forEach> --%>
+<!-- 					</table> -->
+<!-- 				</div> -->
+
+		<input type="button" onclick="javascript:searchList(); return false;"
+			value="select">
+	</form>
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+package com.cosmo.estimateNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.vo.NewCarSelectVO;
+
+public interface NewCarSelectService {
+	List<NewCarSelectVO> selectNewCar(NewCarSelectVO newCarSelectVO) throws Exception;
+	
+	List<NewCarSelectVO> selectBodyType() throws Exception;
+}

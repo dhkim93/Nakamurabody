@@ -1,0 +1,13 @@
+package com.cosmo.estimateNewCar.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+import org.springframework.transaction.annotation.Transactional;
+
+import com.cosmo.vo.NewCarSelectVO;
+
+public class PopEstimateNewCarDetailDaoImpl extends SqlSessionDaoSupport implements PopEstimateNewCarDetailDao{
+
+	
+}

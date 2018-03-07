@@ -1,0 +1,12 @@
+package com.cosmo.customer.service;
+
+import java.util.List;
+
+import com.cosmo.vo.CustomerSelectVO;
+
+public interface CustomerSelectService {
+
+	List<CustomerSelectVO> selectCustomer(CustomerSelectVO customerSelectVO) throws Exception;
+	List<CustomerSelectVO> detailCustomer(CustomerSelectVO customerSelectVO) throws Exception;
+	
+}

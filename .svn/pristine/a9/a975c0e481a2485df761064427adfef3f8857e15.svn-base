@@ -1,0 +1,33 @@
+package com.cosmo.employee.controller;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.cosmo.customer.HomeController;
+import com.cosmo.employee.service.EmployeeManagementService;
+import com.cosmo.vo.EmployeeManagementVO;
+
+@Controller
+public class EmployeeManagementController {
+private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	
+	@Autowired
+	private EmployeeManagementService employeeManagementService;
+	
+	@RequestMapping(value = "/employeeManagement.do")
+	public String employeeManagementView(@ModelAttribute("employeeManagementVO") EmployeeManagementVO employeeManagementVO, ModelMap model) 
+			throws Exception {
+		List<EmployeeManagementVO> employeeManagementSelect = employeeManagementService.selectEmployeeManagement(employeeManagementVO);
+		System.out.println(employeeManagementSelect.get(0).getEmployeeId());
+		model.addAttribute("employeeManagementSelect", employeeManagementSelect);
+		return "Employee/employee_management";
+	}
+	
+}

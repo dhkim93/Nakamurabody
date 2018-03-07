@@ -1,0 +1,37 @@
+package com.cosmo.estimateNewCar.controller;
+
+import java.util.List;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.cosmo.estimateNewCar.service.PopEstimateNewCarDetailService;
+import com.cosmo.vo.PopEstimateNewCarDetailVO;
+
+/*
+ * naehoon
+ * 2018-02-23
+ * 新車見積詳細 Controller
+ **/
+
+@Controller
+public class PopEstimateNewCarDetailController {
+
+	@Autowired
+	private PopEstimateNewCarDetailService popEstimateNewCarDetailService;
+	
+	//初期画面
+	@RequestMapping(value="/popEstimateNewCarDetail.do" , method = RequestMethod.GET)
+	public String popEstimateNewCarDetail(@ModelAttribute("popEstimateNewCarDetailVO") PopEstimateNewCarDetailVO popEstimateNewCarDetailVO, ModelMap model) throws Exception {
+		List<PopEstimateNewCarDetailVO> EstimateNewCarDetail = popEstimateNewCarDetailService.selectPopEstimateNewCarDetail(popEstimateNewCarDetailVO);
+		String json = new ObjectMapper().writeValueAsString(EstimateNewCarDetail);
+		model.addAttribute("EstimateNewCarDetail", EstimateNewCarDetail);
+		model.addAttribute("EstimateNewCarDetailJson", json);
+		return "EstimateNewCar/popEstimateNewCarDetail";
+	}	
+}

@@ -1,0 +1,92 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<c:import url="/WEB-INF/views/common/header.jsp" />
+<script>
+	$(function() {
+		$("#tabs").tabs();
+	});
+</script>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>新車見積</title>
+</head>
+<body>
+	<div id="cus_header">
+		<h1 align="center">新車見積</h1>
+	</div>
+	<div id="estimateRepair_top">
+		<form id="topform" method="post" action="#">
+			<fieldset>
+				<span>新車見積選択</span>
+				<table>
+					<tr>
+						<td><span>ボデータイプ</span></td>
+						<td width="10%">*</td>
+						<td><select id="combovalue">
+								<c:forEach items="${selectBodyType }" var="bodyType">
+									<option value="${bodyType.combotype }">${bodyType.comboname }</option>
+								</c:forEach>
+						</select></td>
+						<td width="30%"></td>
+						<td><input type="button" value="検索"
+							onclick="searchList(); return false;"></td>
+					</tr>
+				</table>
+			</fieldset>
+		</form>
+	</div>
+	<div id="cus_middle">
+		<fieldset style="height: 430px">
+			<span>修理見積</span>
+			<div id="tabs">
+				<ul>
+					<li><a href="#tabsA">A</a></li>
+					<li><a href="#tabsB">B</a></li>
+					<li><a href="#tabsC">C</a></li>
+					<li><a href="#tabsD">D</a></li>
+					<li><a href="#tabsE">E</a></li>
+					<li><a href="#tabsF">F</a></li>
+					<li><a href="#tabsG">G</a></li>
+					<li><a href="#tabsH">H</a></li>
+					<li><a href="#tabsInput">直接入力</a></li>
+				</ul>
+				<div id="tabsA">
+					<p>A</p>
+				</div>
+				<div id="tabsB">
+					<p>B</p>
+				</div>
+				<div id="tabsC">
+					<p>C</p>
+				</div>
+				<div id="tabsD">
+					<p>D</p>
+				</div>
+				<div id="tabsE">
+					<p>E</p>
+				</div>
+				<div id="tabsF">
+					<p>F</p>
+				</div>
+				<div id="tabsG">
+					<p>G</p>
+				</div>
+				<div id="tabsH">
+					<p>H</p>
+				</div>
+				<div id="tabsInput">
+					<p>直接入力</p>
+				</div>
+			</div>
+		</fieldset>
+	</div>
+	<div id="footer">
+		<input type=button style="width: 120pt; height: 40pt;" value="戻る"
+			onclick="history.back()">
+	</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+package com.cosmo.employee.service;
+
+import java.util.List;
+
+import com.cosmo.employee.dao.EmployeeSelectDao;
+import com.cosmo.vo.EmployeeSelectVO;
+
+public class EmployeeSelectServiceImpl implements EmployeeSelectService{
+	
+	private EmployeeSelectDao employeeSelectDao;
+
+	public void setEmployeeSelectDao(EmployeeSelectDao employeeSelectDao) {
+		this.employeeSelectDao = employeeSelectDao;
+	}
+	@Override
+	public List<EmployeeSelectVO> selectEmployee(EmployeeSelectVO employeeSelectVO) throws Exception {
+		return employeeSelectDao.selectEmployee(employeeSelectVO);
+	}
+
+	
+
+}

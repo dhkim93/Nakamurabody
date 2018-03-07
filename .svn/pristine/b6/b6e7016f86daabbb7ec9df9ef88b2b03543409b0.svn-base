@@ -1,0 +1,15 @@
+package com.cosmo.employee.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.cosmo.vo.EmployeeManagementVO;
+
+public class EmployeeManagementDaoImpl extends SqlSessionDaoSupport implements EmployeeManagementDao{
+	
+	@Override
+	public List<EmployeeManagementVO> selectEmployeeManagement(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return getSqlSession().selectList("employeeManagementDao.selectEmployeeManagement", employeeManagementVO);
+	}
+}

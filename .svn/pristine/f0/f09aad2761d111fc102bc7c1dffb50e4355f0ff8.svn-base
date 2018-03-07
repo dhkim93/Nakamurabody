@@ -1,0 +1,14 @@
+package com.cosmo.employee.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.cosmo.vo.EmployeeManagementVO;
+
+public class PopManagementEmployeeDaoImpl extends SqlSessionDaoSupport implements PopManagementEmployeeDao{
+	
+	public List<EmployeeManagementVO> selectPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception{
+		return getSqlSession().selectList("popManagementEmployeeDao.selectPopEmployeeInfo", employeeManagementVO);
+	}
+}

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="popEstimateNewCarDetailDao" >
+	<!-- select Query -->
+	<select id="selectPopEstimateNewCarDetail" parameterType="popEstimateNewCarDetailVO" resultType="popEstimateNewCarDetailVO">
+		SELECT 
+			 T1.ESTIMATENUMBER 
+			,T1.TABID 
+			,T1.TABNAME 
+			,T1.FRAMECODE 
+			,T1.CHOICESPEC 
+			,T1.SPECITEM                  
+			,T1.SPECDETAIL               
+			,T1.UNIT 
+			,T1.LISTPRICE 
+			,T1.QUANTITY 
+			,T1.SUBTOTAL
+			,T2.CUSTOMERID
+			,T2.BODYNAME
+			,T2.ESTIMATEDAY
+			,T2.ESTIMATEEMPLOYEENAME
+			,T2.REMARKS
+			,T3.CUSTOMERKANA
+			,T3.CUSTOMERNAME1
+			,T3.STATE			
+		FROM 
+			NEWCARESTIMATEDETAILINFO T1
+		INNER JOIN NEWCARESTIMATEINFO T2
+			ON T1.ESTIMATENUMBER = T2.ESTIMATENUMBER
+		INNER JOIN CUSTOMERINFO T3
+			ON T2.CUSTOMERID = T3.CUSTOMERID
+		WHERE T1.ESTIMATENUMBER = #{estimatenumber}
+		AND T2.CUSTOMERID = #{customerid}
+	</select>
+	
+	<delete id="deleteNewCar" parameterType="popEstimateNewCarDetailVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+		AND CUSTOMERID = #{customerid}
+	</delete>
+	
+	<delete id="deleteNewCarDetail" parameterType="popEstimateNewCarDetailVO">
+		DELETE  
+		FROM 
+			NEWCARESTIMATEDETAILINFO
+		WHERE ESTIMATENUMBER = #{estimatenumber}
+	</delete>	
+		
+</mapper>

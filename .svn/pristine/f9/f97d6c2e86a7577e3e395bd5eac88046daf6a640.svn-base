@@ -1,0 +1,6 @@
+package com.cosmo.estimateNewCar.dao;
+
+public interface PopEstimateNewCarDetailDao{
+	
+	
+}

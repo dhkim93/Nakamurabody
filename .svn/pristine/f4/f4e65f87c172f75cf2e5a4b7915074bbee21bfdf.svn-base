@@ -1,0 +1,138 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<c:import url="/WEB-INF/views/common/header.jsp" />
+</head>
+<script language='javascript'>
+	var id, name, manage;
+
+	function btnLogin() {
+		id = document.login.id.value;
+		var pw = document.login.pw.value;
+		var chkId = '0';
+		var chkPw = '0';
+		var listId = new Array();
+		var listPw = new Array();
+		var listManage = new Array();
+		var listName = new Array();
+		manage = '';
+		name = '';
+
+		<c:forEach items="${employeeSelect}" var="employees" varStatus="status">
+		listId.push("${employees.employeeid}");
+		listPw.push("${employees.employeepassword}");
+		listManage.push("${employees.manager}");
+		listName.push("${employees.employeename}");
+		</c:forEach>
+
+		if (id == "") {
+			alert("IDを入力してください。");
+		} else if (pw == "") {
+			alert("パスワードを入力してください。");
+		} else {
+			for (var i = 0; i < listId.length; i++) {
+				if (pw == listPw[i]) {
+					chkPw++;
+				}
+				if (id == listId[i]) {
+					chkId++;
+					manage = listManage[i];
+					name = listName[i];
+				}
+			}
+			if (chkId == 0 || chkPw == 0) {
+				alert("ID又はパスワードが正しくありません。");
+			} else if (id == pw) {
+				changepwd(id);
+			} else {
+				if (manage == '1') {
+					location.href = "loginManager.do?name=" + name + "&id="
+							+ id;
+				} else if (manage == '0') {
+					location.href = "loginUser.do?name=" + name + "&id=" + id;
+				}
+			}
+		}
+	}
+
+	function changepwd() {
+		cw = screen.availWidth;
+		ch = screen.availHeight;
+		sw = 440;
+		sh = 250;
+		ml = (cw - sw) / 2;
+		mt = (ch - sh) / 2;
+		var pwdpop = window.open('changepwdView.do', 'パスワード変更', 'width=' + sw
+				+ ',height=' + sh + ',top=' + mt + ',left=' + ml
+				+ ',resizable=no,scrollbars=yes');
+	}
+
+	function btnQuit() {
+		var retVal = confirm("見積支援システムを終了しますか?");
+		if (retVal == true) {
+			window.open('about:blank', '_self').self.close();
+		}
+	}
+
+	function getReturnValue(returnValue) {
+		if (returnValue == "OK") {
+			if (manage == '1') {
+				location.href = "loginManager.do?name=" + name + "&id=" + id;
+			} else if (manage == '0') {
+				location.href = "loginUser.do?name=" + name + "&id=" + id;
+			}
+		}
+	}
+</script>
+<body>
+	<div id="navLogin">
+		<%@ include file="nav_main.jsp"%>
+	</div>
+
+	<div id="bodyLogin">
+		<%-- <jsp:include page="<%=contentPage %>"/>  --%>
+		<form name="login" method="get">
+			<table width=100% border=0 cellspacing=0>
+				<tr>
+					<td width=100 bgcolor=skyblue id="tableCenter">ID</td>
+					<td width=20></td>
+					<td><input type="text" name="id" id=id /></td>
+				</tr>
+				<tr>
+					<td colspan=3 height=5 />
+				</tr>
+				<tr>
+					<td width=100 bgcolor=skyblue id="tableCenter">PWD</td>
+					<td width=20></td>
+					<td><input type="password" name="pw" /></td>
+				</tr>
+			</table>
+		</form>
+
+		<div id="btnLoginLine">
+			<div style="padding-right: 20px; display: inline;">
+				<input type="button" value="ログイン" onclick="btnLogin()">
+			</div>
+			<div style="display: inline;">
+
+				<input type="button" value="終了" onclick="btnQuit()">
+			</div>
+			<%-- 				<c:out value="${employeeSelect.get(0).employeeId}" /> --%>
+
+			<%-- 				<c:forEach items="${employeeSelect}" var="employees" --%>
+			<%-- 					varStatus="status"> --%>
+			<%-- 						${employees.employeeId} --%>
+			<%-- 					</c:forEach> --%>
+		</div>
+	</div>
+
+	<div id="footerLogin">
+		<%@ include file="footer.jsp"%>
+	</div>
+</body>
+</html>

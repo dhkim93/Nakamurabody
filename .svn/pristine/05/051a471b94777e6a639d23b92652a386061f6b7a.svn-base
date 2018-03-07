@@ -1,0 +1,24 @@
+package com.cosmo.employee.service;
+
+import java.util.List;
+
+import com.cosmo.employee.dao.EmployeeManagementDao;
+import com.cosmo.vo.EmployeeManagementVO;
+
+public class EmployeeManagementServiceImpl implements EmployeeManagementService{
+	
+	private EmployeeManagementDao employeeManagementDao;
+
+	public void setEmployeeManagementDao(EmployeeManagementDao employeeManagementDao) {
+		this.employeeManagementDao = employeeManagementDao;
+	}
+
+
+	@Override
+	public List<EmployeeManagementVO> selectEmployeeManagement(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return employeeManagementDao.selectEmployeeManagement(employeeManagementVO);
+	}
+
+	
+
+}

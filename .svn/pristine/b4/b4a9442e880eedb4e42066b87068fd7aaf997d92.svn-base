@@ -1,0 +1,9 @@
+package com.cosmo.managementRepair.dao;
+
+import java.util.List;
+
+import com.cosmo.vo.ManhourSelectPriceVO;
+
+public interface PopManagementManhourDao {
+	public List<ManhourSelectPriceVO> selectPrice(ManhourSelectPriceVO manhourSelectPriceVO) throws Exception;
+}

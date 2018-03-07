@@ -1,0 +1,23 @@
+package com.cosmo.managementNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.managementNewCar.dao.PopManagementNewCarBodyDao;
+import com.cosmo.vo.PopManagementNewCarBodyVO;
+
+public class PopManagementNewCarBodyServiceImpl implements PopManagementNewCarBodyService {
+
+	private PopManagementNewCarBodyDao popManagementNewCarBodyDao;
+
+	public void setPopManagementNewCarBodyDao(PopManagementNewCarBodyDao popManagementNewCarBodyDao) {
+		this.popManagementNewCarBodyDao = popManagementNewCarBodyDao;
+	}
+
+	@Override
+	public List<PopManagementNewCarBodyVO> selectNewCarBody(PopManagementNewCarBodyVO managementNewCarBodyVO)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return popManagementNewCarBodyDao.selectNewCarBody(managementNewCarBodyVO);
+	}
+
+}

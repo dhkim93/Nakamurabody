@@ -1,0 +1,39 @@
+package com.cosmo.employee.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.cosmo.vo.EmployeeManagementVO;
+
+public class PopManagementEmployeeDaoImpl extends SqlSessionDaoSupport implements PopManagementEmployeeDao {
+	// 該当ユーザ情報取得
+	public List<EmployeeManagementVO> selectPopEmployeeInfo(EmployeeManagementVO employeeManagementVO)
+			throws Exception {
+		return getSqlSession().selectList("popManagementEmployeeDao.selectPopEmployeeInfo", employeeManagementVO);
+	}
+
+	// グリッド削除
+	public int deletePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return getSqlSession().delete("popManagementEmployeeDao.deletePopEmployeeInfo", employeeManagementVO);
+	}
+
+	// ユーザ情報更新
+	public int updatePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return getSqlSession().update("popManagementEmployeeDao.updatePopEmployeeInfo", employeeManagementVO);
+	}
+
+	// ユーザ情報登録
+	public int insertPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception {
+		return getSqlSession().insert("popManagementEmployeeDao.insertPopEmployeeInfo", employeeManagementVO);
+	}
+	// パスワードを初期化
+	public int resetPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception{
+		return getSqlSession().update("popManagementEmployeeDao.resetPopEmployeeInfo", employeeManagementVO);
+	}
+
+	// 重複チェック
+	public List<EmployeeManagementVO> duplicatePopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception{
+		return getSqlSession().selectList("popManagementEmployeeDao.duplicatePopEmployeeInfo", employeeManagementVO);
+	}
+}

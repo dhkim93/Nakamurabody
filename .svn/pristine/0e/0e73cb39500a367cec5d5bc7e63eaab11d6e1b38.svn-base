@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="popManagementNewCarBodyDao" >
+	<!-- select Query -->
+	<select id="select" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '1'
+	</select>
+	
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM constmaster
+		WHERE mastertype='1'
+		AND combotype= #{combotype}
+	</delete>
+	
+	<insert id="insert" parameterType="java.util.HashMap">
+		INSERT INTO constmaster
+		VALUES('1',#{combotype},#{comboname},'');
+	</insert>
+	
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE constmaster 
+		SET comboname = #{comboname}
+		WHERE mastertype='1'AND combotype=#{combotype}
+	</update>
+	
+	
+<!-- 	<insert id="insertManageNewCarBody"> -->
+<!-- 		INSERT INTO constmaster -->
+<!-- 		VALUES ('1',) -->
+<!-- 	</insert> -->
+	
+	<!-- select Query -->
+	<select id="selectManageNewCarUnit" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '3'
+	</select>
+	<!-- select Query -->
+	<select id="selectManageNewCarOption" parameterType="popManagementNewCarBodyVO" resultType="popManagementNewCarBodyVO">
+		SELECT * 
+		FROM constmaster
+		WHERE mastertype = '1'
+	</select>
+	
+	
+</mapper>

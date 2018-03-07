@@ -1,0 +1,16 @@
+package com.cosmo.estimateNewCar.dao;
+
+import java.util.List;
+
+import org.mybatis.spring.support.SqlSessionDaoSupport;
+
+import com.cosmo.vo.EstimateNewCarVO;
+
+public class EstimateNewCarDaoImpl extends SqlSessionDaoSupport implements EstimateNewCarDao {
+
+	@Override
+	public List<EstimateNewCarVO> selectBodyType() {
+		return getSqlSession().selectList("estimateNewCarDao.selectBodyType");
+	}
+
+}

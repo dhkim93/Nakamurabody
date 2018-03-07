@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="newCarSelectDao" >
+	
+	<!-- select Query -->
+	<select id="selectNewCar" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+		SELECT 
+			 ESTIMATENUMBER
+			,T1.CUSTOMERID AS CUSTOMERID
+			,T2.CUSTOMERNAME1 AS CUSTOMERNAME
+			,BODYTYPE
+			,BODYNAME
+			,BODYSPECNAME
+			,ESTIMATEMONEY
+			,ESTIMATEEMPLOYEEID
+			,ESTIMATEEMPLOYEENAME
+			,ESTIMATEEMPLOYEEKANA
+			,ESTIMATEDAY
+			,REMARKS
+		FROM 
+			NEWCARESTIMATEINFO T1
+		INNER JOIN 
+			CUSTOMERINFO T2
+		ON T1.CUSTOMERID = T2.CUSTOMERID
+		WHERE 
+			ESTIMATENUMBER LIKE #{estimatenumber}||'%'
+		AND ESTIMATEEMPLOYEEKANA LIKE #{estimateemployeekana}||'%'	
+		AND CUSTOMERKANA LIKE #{customerkana}||'%'	
+		<if test='bodytype != "0"'>
+			<![CDATA[ 
+				AND BODYTYPE = #{bodytype}
+			]]>
+		</if>
+		ORDER BY ESTIMATENUMBER DESC
+	</select>
+	
+	<select id="selectBodyType" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+		SELECT 
+			T1.MASTERTYPE AS MASTERTYPE
+			,T2.TABNAME AS TABNAME
+			,COMBOTYPE
+			,COMBONAME
+		FROM 
+			CONSTMASTER T1
+		INNER JOIN OPTIONMASTER T2
+			ON T1.MASTERTYPE = T2.MASTERTYPE
+			AND T1.COMBOTYPE = T2.TABID
+		WHERE T1.MASTERTYPE ='1'
+	</select>
+	
+	<select id="selectBodyTypeDetail" parameterType="newCarSelectVO" resultType="newCarSelectVO">
+		SELECT SPECDETAIL 
+		FROM 
+			NEWCARMASTERDETAIL
+		WHERE MASTERTYPE = #{bodytype}
+		AND TABNAME = 'A'
+	</select>
+	
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="popManagementEmployeeDao">
+	
+	<select id="selectPopEmployeeInfo" parameterType="employeeManagementVO"
+		resultType="employeeManagementVO">
+		SELECT employeeid, employeename, employeekana,
+		employeemobilenumber, employeeemail,
+		employeeenteringday, employeeleavingday 
+		FROM
+		"employeeinfo"
+		WHERE 
+			EMPLOYEEID LIKE #{employeeId}||'%'
+		ORDER BY EMPLOYEEENTERINGDAY
+	</select>
+	
+	<delete id="deletePopEmployeeInfo" parameterType="employeeManagementVO">
+		DELETE  
+		FROM 
+			"employeeinfo"
+		WHERE EMPLOYEEID = #{employeeId}
+	</delete>	
+</mapper>

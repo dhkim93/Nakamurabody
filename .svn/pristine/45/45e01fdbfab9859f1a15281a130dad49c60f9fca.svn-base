@@ -1,0 +1,23 @@
+package com.cosmo.estimateNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.estimateNewCar.dao.NewCarSelectDao;
+import com.cosmo.vo.NewCarSelectVO;
+
+public class NewCarSelectServiceImpl implements NewCarSelectService {
+
+	private NewCarSelectDao newCarSelectDao;
+	
+	public void setNewCarSelectDao(NewCarSelectDao newCarSelectDao){
+		this.newCarSelectDao = newCarSelectDao;
+	}
+
+	public List<NewCarSelectVO> selectNewCar(NewCarSelectVO newCarSelectVO) throws Exception {
+		return newCarSelectDao.selectNewCar(newCarSelectVO);
+	}
+	
+	public List<NewCarSelectVO> selectBodyType() throws Exception {
+		return newCarSelectDao.selectBodyType();
+	}	
+}

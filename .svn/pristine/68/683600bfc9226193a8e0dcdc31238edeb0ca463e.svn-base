@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "HTTP://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+	<typeAliases>
+		<typeAlias alias="newCarSelectVO" type="com.cosmo.vo.NewCarSelectVO" />
+		<typeAlias alias="estimateRepairVO" type="com.cosmo.vo.EstimateRepairVO" />
+		<typeAlias alias="customerSelectVO" type="com.cosmo.vo.CustomerSelectVO" />
+		<typeAlias alias="employeeSelectVO" type="com.cosmo.vo.EmployeeSelectVO" />
+		<typeAlias alias="popManagementNewCarBodyVO" type="com.cosmo.vo.PopManagementNewCarBodyVO" />
+		<typeAlias alias="employeeManagementVO" type="com.cosmo.vo.EmployeeManagementVO" />
+		<typeAlias alias="manhourSelectPriceVO" type="com.cosmo.vo.ManhourSelectPriceVO" />
+		<typeAlias alias="estimateNewCarVO" type="com.cosmo.vo.EstimateNewCarVO" />
+		<typeAlias alias="popEstimateNewCarDetailVO" type="com.cosmo.vo.PopEstimateNewCarDetailVO" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="/sqlMap/NewCarSelect.xml" />
+		<mapper resource="/sqlMap/EstimateRepair.xml" />
+		<mapper resource="/sqlMap/CustomerSelect.xml" />
+		<mapper resource="/sqlMap/EmployeeSelect.xml" />
+		<mapper resource="/sqlMap/PopManagementNewCarBodySelect.xml" />
+		<mapper resource="/sqlMap/EmployeeManagement.xml" />
+		<mapper resource="/sqlMap/SelectPrice.xml" />
+		<mapper resource="/sqlMap/EstimateNewCar.xml" />
+		<mapper resource="/sqlMap/PopEstimateNewCarDetail.xml" />
+	</mappers>
+
+</configuration>

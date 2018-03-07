@@ -1,0 +1,20 @@
+package com.cosmo.employee.service;
+
+import java.util.List;
+
+import com.cosmo.employee.dao.PopManagementEmployeeDao;
+import com.cosmo.vo.EmployeeManagementVO;
+
+public class PopManagementEmployeeServiceImpl implements PopManagementEmployeeService{
+
+	private PopManagementEmployeeDao popManagementEmployeeDao;
+
+	public void setPopManagementEmployeeDao(PopManagementEmployeeDao popManagementEmployeeDao) {
+		this.popManagementEmployeeDao = popManagementEmployeeDao;
+	}
+
+
+	public List<EmployeeManagementVO> selectPopEmployeeInfo(EmployeeManagementVO employeeManagementVO) throws Exception{
+		return popManagementEmployeeDao.selectPopEmployeeInfo(employeeManagementVO);
+	}
+}

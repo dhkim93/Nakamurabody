@@ -1,0 +1,114 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html PUBLIC>
+<html>
+<style>
+span {
+	display: inline-block;
+	background-color: #bbdefb;
+	width: 100%
+}
+
+#header {
+	width: 1400px;
+}
+
+#top {
+	width: 1400px;
+	margin-bottom: 20px;
+	float: left;
+}
+
+#middle {
+	width: 1400px;
+	float: left;
+}
+
+#middle_top {
+	width: 1360px;
+}
+
+#middle_bottom {
+	width: 100%;
+	float: left;
+}
+
+#middle_left {
+	width: 730px;
+	height: 60px;
+	margin-top: 30px;
+	float: left;
+}
+
+#middle_right {
+	width: 530px;
+	height: 350px;
+	float: left;
+}
+
+#footer {
+	width: 1400px;
+	height: 70px;
+	float: left;
+}
+</style>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+<script>
+	function search(){
+		
+	}
+	
+</script>
+</head>
+<body>
+	<div>
+		<div id="header">
+			<h1 align="center">修理見積</h1>
+		</div>
+		<div id="top">
+			<fieldset>
+				<span>修理見積選択</span>
+				<table>
+					<tr>
+						<td><span>車輌タイプ</span></td>
+						<td width="10%">*</td>
+						<td><select>
+							<c:forEach items="${ allNewCarType}" var="carType" >
+								<option>${carType.comboname }</option>
+							</c:forEach>
+						</select></td>
+						<td width="30%"></td>
+						<td><input type="button" value="検索" onclick="search()"></td>
+					</tr>
+				</table>
+			</fieldset>
+		</div>
+		<div id="middle">
+			<fieldset>
+				<div id="middle_top">
+					<span>修理見積</span>
+				</div>
+				<p>
+				<div id="middle_left">
+					<fieldset style="height: 270""></fieldset>
+				</div>
+				<div id="middle_right">
+					<fieldset style="width: 570; height: 300">
+						<span>作業(部品)画像</span>
+					</fieldset>
+				</div>
+				<div id="middle_bottom">
+					<input type="button" value="確認" style="float: right">
+				</div>
+			</fieldset>
+		</div>
+		<div id="footer">
+			<input type="button" value="戻る">
+		</div>
+	</div>
+</body>
+</html>

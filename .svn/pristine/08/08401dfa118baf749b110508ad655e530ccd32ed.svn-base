@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="employeeManagementDao">
+	<select id="selectEmployeeManagement" parameterType="employeeManagementVO"
+		resultType="employeeManagementVO">
+		SELECT * FROM "employeeinfo"
+	</select>
+
+	<select id="selectEmployeeInfo" parameterType="employeeManagementVO"
+		resultType="employeeManagementVO">
+		SELECT employeeid, employeename, employeekana,
+		employeemobilenumber,employeeenteringday, employeeleavingday 
+		FROM
+		"employeeinfo"
+		WHERE 
+			EMPLOYEEID LIKE #{employeeId}||'%'
+		AND EMPLOYEEKANA LIKE #{employeeKana}||'%'
+		<choose>
+		    <when test="!employeeDayFrom.equals('') and !employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEEENTERINGDAY >= CAST(#{employeeDayFrom} AS DATE) AND EMPLOYEELEAVINGDAY <= CAST(#{employeeDayTo} AS DATE) ]]>
+		    </when>	   	    
+		    <when test="employeeDayFrom.equals('') and !employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEELEAVINGDAY <= CAST(#{employeeDayTo} AS DATE) ]]>
+		    </when>	   
+		    <when test="!employeeDayFrom.equals('') and employeeDayTo.equals('') ">
+		    <![CDATA[   AND EMPLOYEEENTERINGDAY >= CAST(#{employeeDayFrom} AS DATE) ]]>
+		    </when>	 
+	    </choose>
+	    
+		ORDER BY EMPLOYEEENTERINGDAY
+		
+		
+	</select>
+</mapper>

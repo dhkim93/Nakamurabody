@@ -1,0 +1,15 @@
+package com.cosmo.estimateNewCar.service;
+
+import java.util.List;
+
+import com.cosmo.vo.EstimateNewCarVO;
+
+public interface EstimateNewCarService {
+
+	List<EstimateNewCarVO> selectBodyType() throws Exception;
+
+	List<EstimateNewCarVO> searchByBodyType(EstimateNewCarVO estimateNewCarVO) throws Exception;
+
+	List<EstimateNewCarVO> searchTabname(EstimateNewCarVO estimateNewCarVO) throws Exception;
+	
+}
